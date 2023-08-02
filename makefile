@@ -1,7 +1,17 @@
-CC=g++
-CFLAGS = -I include/
+CC = g++
+CFLAGS = -g -I include/
+SRCDIR = .\src
+SRC_C = $(wildcard $(addsuffix /*.c, $(SRCDIR)))
+OBJ = main.cpp helper.cpp src\User.cpp src\StreamingService.cpp src\UserDatabase.cpp
 
-TARGETDIR := bin
-TARGET := main
+%.exe: %.cpp
+	$(CC) $(CFLAGS) -c -o $@ $<
+	
+main: $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $^ 
 
-main:
+run: main
+	./main
+
+clean:
+	find . -name "*.o" -type f -delete
