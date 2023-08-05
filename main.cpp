@@ -6,8 +6,8 @@
 #include "UserDatabase.hpp"
 #include "StreamingService.hpp"
 
-#define USER_FILE "rsrc/Users.csv"
-#define STREAMS_FILE "rsrc/Streaming.csv"
+#define USER_FILE "../rsrc/Users.csv"
+#define STREAMS_FILE "../rsrc/Streaming.csv"
 
 UserDatabase UserDB;
 std::vector<StreamingService> StreamingServices;
@@ -57,6 +57,7 @@ void updateAmountOwed() {
     for (auto stream : StreamingServices)
     {
        for (auto id : stream.getIds()) {
+        // std::cout << "Updating id: " << id << std::endl; 
         UserDB.getUserFromID(id).addAmountOwed(stream.getPricePerUser());
        }
     }
@@ -68,7 +69,6 @@ int main(int argc, char *argv[]) {
     //Init streaming services db using 
     initStreamingServices();
     // std::cout << StreamingServices.size() << std::endl;
-    
     //Init user database
     initUserDB();
 
@@ -85,4 +85,8 @@ int main(int argc, char *argv[]) {
         // std::cout << stream.getIdsSize() <<std::endl;
     }
     //Send out venmo requests
+    // for (auto it = UserDB.begin(); it != UserDB.end(); it++) {
+
+    // }
+    
 }

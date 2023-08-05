@@ -81,7 +81,7 @@ User parseUserAndServicesFromLine(const std::string& line, std::vector<Streaming
     while (!serviceSS.eof()) {//Does this work??
         std::string temp;
         std::getline(serviceSS, temp, ';');
-        std::cout << temp << std::endl;
+        // std::cout << temp << std::endl;
         for (auto& stream : streams) {
             if (!stream.getName().compare(temp)) {
                 stream.addID(ret.getId());

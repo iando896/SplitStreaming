@@ -1,0 +1,10 @@
+^C:\USERS\IANDO\CODING\SPLITSTREAMING\BUILD\CMAKEFILES\95C54F1D3819348BDFFCD9DC9DD731C2\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/iando/Coding/SplitStreaming -BC:/Users/iando/Coding/SplitStreaming/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/iando/Coding/SplitStreaming/build/SplitStreaming.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

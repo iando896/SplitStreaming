@@ -28,15 +28,6 @@ void StreamingService::printStream() {
 
 }
 
-// void StreamingService::updateAmountOwed(const std::vector<User>& users) {
-    
-//     for (auto ids : userIDs) {
-//         for (auto it = users.begin(); it != users.end(); it++) {
-//             if (it->)//find same id number and update with amount
-//         }
-//     }
-// }
-
 std::string StreamingService::getName() {
     return name;
 }

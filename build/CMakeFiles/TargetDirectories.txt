@@ -1,0 +1,4 @@
+C:/Users/iando/Coding/SplitStreaming/build/CMakeFiles/SplitStreaming.dir
+C:/Users/iando/Coding/SplitStreaming/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/iando/Coding/SplitStreaming/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/iando/Coding/SplitStreaming/build/src/CMakeFiles/Classes.dir

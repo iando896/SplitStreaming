@@ -1,12 +1,15 @@
 #include "UserDatabase.hpp"
 #include <iostream>
 UserDatabase::UserDatabase() 
-:
+:   paidUser(),
     db()
 {}
 
-UserDatabase::~UserDatabase() {
+UserDatabase::~UserDatabase() 
+{}
 
+std::unordered_map<unsigned int, User>::iterator UserDatabase::begin() {
+    return db.begin();
 }
 
 void UserDatabase::addPaidUser(const std::string& line, std::vector<StreamingService>& streams) {
@@ -19,6 +22,10 @@ void UserDatabase::addUserFromLine(const std::string& line, std::vector<Streamin
 }
 
 User& UserDatabase::getUserFromID(unsigned int id) {
+    if (id == 0)
+        return paidUser;
+    if (db.count(id) == 0) 
+        std::cout << "Not in UserDB" << std::endl;
     return db[id];
 }
 
