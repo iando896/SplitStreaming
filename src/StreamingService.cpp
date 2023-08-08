@@ -21,7 +21,6 @@ std::unordered_set<unsigned int> StreamingService::getIds() {
 }
 
 void StreamingService::printStream() {
-    // std::cout << "---Streaming Service---" << std::endl;
     std::cout << "Name: " << name << std::endl;
     std::cout << "User Count: " << ids.size() << std::endl;
     std::cout << "Price: " << price << std::endl << std::endl;

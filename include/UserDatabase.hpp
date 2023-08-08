@@ -18,6 +18,7 @@ public:
     void addPaidUser(const std::string& line, std::vector<StreamingService>& streams);
     void addUserFromLine(const std::string& line, std::vector<StreamingService>& streams);
     std::unordered_map<unsigned int, User>::iterator begin();
+    std::unordered_map<unsigned int, User>::iterator end();
     void removeUserByID(unsigned int id);
     User& getUserFromID(unsigned int id);
     void printUserDB();
