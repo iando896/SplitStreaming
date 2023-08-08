@@ -12,6 +12,11 @@ std::unordered_map<unsigned int, User>::iterator UserDatabase::begin() {
     return db.begin();
 }
 
+std::unordered_map<unsigned int, User>::iterator UserDatabase::end() {
+    return db.end();
+}
+
+
 void UserDatabase::addPaidUser(const std::string& line, std::vector<StreamingService>& streams) {
     paidUser = parseUserAndServicesFromLine(line, streams);
 }

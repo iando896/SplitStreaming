@@ -33,12 +33,28 @@ std::string User::getName() {
     return name;
 }
 
+std::string User::getPriceMessage() const{
+    return priceMessage;
+}
+
+std::string User::getPriceMessage() {
+    return priceMessage;
+}
+
 std::string User::getVenmoUser() const {
     return venmoUser;
 }
 
 std::string User::getVenmoUser() {
     return venmoUser;
+}
+
+float User::getAmountOwed() const {
+    return amountOwed;
+}
+
+float User::getAmountOwed() {
+    return amountOwed;
 }
 
 const unsigned int User::getId() const {
@@ -60,6 +76,17 @@ void User::addAmountOwed(float amount) {
     amountOwed += amount;
 }
 
+void User::concatPriceMessage(const std::string& msg) {
+    priceMessage += msg;
+}
+
+
+std::string removeQuotes(const std::string& s) {
+    if (s.size() < 2 or s[0] != '"' or s[s.size() - 1] != '"')
+        return "";
+    return s.substr(1, s.size() - 2);
+}
+
 User parseUserAndServicesFromLine(const std::string& line, std::vector<StreamingService>& streams) {
     //Skip first column
     std::stringstream ss(line);
@@ -71,17 +98,16 @@ User parseUserAndServicesFromLine(const std::string& line, std::vector<Streaming
     getline(ss, services);
 
 
-    std::stringstream serviceSS(services.substr(1, services.size() - 2));
+    std::stringstream serviceSS(removeQuotes(services));
     // std::cout << serviceSS.str() << std::endl;
 
-    User ret(name, username);
+    User ret(removeQuotes(name), removeQuotes(username));
     // std::cout << "ID: " << ret.getId() << std::endl;
     //User make request for stream
     //Stream tracks user requesting and 
     while (!serviceSS.eof()) {//Does this work??
         std::string temp;
         std::getline(serviceSS, temp, ';');
-        // std::cout << temp << std::endl;
         for (auto& stream : streams) {
             if (!stream.getName().compare(temp)) {
                 stream.addID(ret.getId());

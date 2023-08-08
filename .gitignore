@@ -1,3 +1,8 @@
 *.csv
-.vscode/
+/.vscode/
 /venmo.py
+/build/
+/.venv/
+/__pycache__/
+rsrc/Users.csv
+/bin/
