@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "User.hpp"
+#include <User.hpp>
 #include "UserDatabase.hpp"
 #include "StreamingService.hpp"
 
@@ -12,8 +12,8 @@
 #include <pybind11/embed.h>
 namespace py = pybind11;
 
-#define USER_FILE "../rsrc/Users.csv"
-#define STREAMS_FILE "../rsrc/Streaming.csv"
+#define PATH_TO_USER "rsrc/Split Streaming Form.csv"
+#define PATH_TO_STREAMING "rsrc/Streaming.csv"
 
 UserDatabase UserDB;
 std::vector<StreamingService> StreamingServices;
@@ -83,19 +83,16 @@ void printStreams() {
 }
 
 //Pass the stream file, user file, and access token for Venmo
-
+#include <filesystem>
 int main(int argc, char *argv[]) {
     //Parse csv file for users, streaming services, and mapping
-    //Init streaming services db using 
-    if (argc < 3) {
-        std::cout << "Not enough args\n" << std::endl;
-        return 1;
-    }
-    
-    initStreamingServices(argv[1]);
+    std::filesystem::path cwd = std::filesystem::current_path();
+    std::cout << cwd << std::endl;
+
+    initStreamingServices(PATH_TO_STREAMING);
     // std::cout << StreamingServices.size() << std::endl;
     //Init user database
-    initUserDB(argv[2]);
+    initUserDB(PATH_TO_USER);
 
     updateAmountOwed();
 
@@ -104,21 +101,21 @@ int main(int argc, char *argv[]) {
     //Calculate prices for each person
     //Divide price per user
     //update amount owed by each user
-    if (argc == 4) {
-        py::scoped_interpreter guard{};
+    py::scoped_interpreter guard{};
     
-        try
-        {
-            auto venmoModule = py::module::import("venmo");
-            auto requestPayFunc = venmoModule.attr("request_pay");
-            for (auto it = UserDB.begin(); it != UserDB.end(); it++) {
-                requestPayFunc(it->second.getAmountOwed(), it->second.getPriceMessage(),
-                            it->second.getVenmoUser(), argv[3]);
-            }
+    try
+    {
+        auto venmoModule = py::module::import("venmo");
+        auto requestPayFunc = venmoModule.attr("request_pay");
+        for (auto it = UserDB.begin(); it != UserDB.end(); it++) {
+            if (argc > 1)
+                requestPayFunc(it->second.getAmountOwed(), it->second.getPriceMessage(), it->second.getVenmoUser(), argv[1]);
+            else
+                requestPayFunc(it->second.getAmountOwed(), it->second.getPriceMessage(), it->second.getVenmoUser());
         }
-        catch(py::error_already_set& e)
-        {
-            std::cerr << e.what() << '\n';
-        }
+    }
+    catch(py::error_already_set& e)
+    {
+        std::cerr << e.what() << '\n';
     }
 }

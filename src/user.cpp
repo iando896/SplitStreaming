@@ -82,7 +82,7 @@ void User::concatPriceMessage(const std::string& msg) {
 
 
 std::string removeQuotes(const std::string& s) {
-    if (s.size() < 2 or s[0] != '"' or s[s.size() - 1] != '"')
+    if ((s.size() < 2) || (s[0] != '"') || (s[s.size() - 1] != '"'))
         return "";
     return s.substr(1, s.size() - 2);
 }
@@ -117,6 +117,5 @@ User parseUserAndServicesFromLine(const std::string& line, std::vector<Streaming
        
         }
     }
-    // std::cout << streams.at(0).getIdsSize() << std::endl;
     return ret;
 }
