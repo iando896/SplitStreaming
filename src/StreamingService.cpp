@@ -45,5 +45,6 @@ StreamingService parseStreamingServices(const std::string& line) {
     std::string name, price;
     std::getline(ss, name, ',');
     ss >> price;
+    std::cout << ss.str() << std::endl;
     return StreamingService(name, std::stof(price));
 }   

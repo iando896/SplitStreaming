@@ -12,9 +12,6 @@
 #include <pybind11/embed.h>
 namespace py = pybind11;
 
-#define USER_FILE "../rsrc/Users.csv"
-#define STREAMS_FILE "../rsrc/Streaming.csv"
-
 UserDatabase UserDB;
 std::vector<StreamingService> StreamingServices;
 
@@ -27,6 +24,7 @@ void initStreamingServices(char* fileName) {
         std::cout << "Failed to open Streaming" << std::endl;
         //TODO: Add exception handling
     } else {
+        std::cout << "Opening" << std::endl;
         std::string line;
         while(!StreamingServiceFile.eof()) {
             std::getline(StreamingServiceFile, line);
@@ -93,7 +91,7 @@ int main(int argc, char *argv[]) {
     }
     
     initStreamingServices(argv[1]);
-    // std::cout << StreamingServices.size() << std::endl;
+    std::cout << StreamingServices.size() << std::endl;
     //Init user database
     initUserDB(argv[2]);
 
