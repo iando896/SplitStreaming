@@ -27,6 +27,7 @@ void initStreamingServices(char* fileName) {
         std::cout << "Failed to open Streaming" << std::endl;
         //TODO: Add exception handling
     } else {
+        std::cout << "Opening" << std::endl;
         std::string line;
         while(!StreamingServiceFile.eof()) {
             std::getline(StreamingServiceFile, line);
